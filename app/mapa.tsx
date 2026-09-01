@@ -2,6 +2,7 @@ import { useLocalSearchParams } from "expo-router";
 import { Text, View } from "react-native";
 import { SafeAreaView } from "react-native-safe-area-context";
 import BarraNavegacao from "../components/barra_navegacao";
+import StatusLogin from "../components/status_login";
 
 export default function Mapa() {
   const { logado } = useLocalSearchParams<{ logado?: string }>();
@@ -11,13 +12,9 @@ export default function Mapa() {
     <SafeAreaView style={{ flex: 1, backgroundColor: "#f6f8fa" }}>
       <BarraNavegacao />
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        {estaLogado ? (
-          <>
-          <Text style={{ color: "green", fontWeight: "bold" }}>Sim está logado</Text>
+        <StatusLogin estaLogado={estaLogado} />
+        {estaLogado && (
           <Text style={{ fontSize: 18 }}>Botão adiciona buraco</Text>
-          </>
-        ) : (
-          <Text style={{ color: "red", fontWeight: "bold" }}>Não está logado</Text>
         )}
         <Text style={{ fontSize: 18, alignItems: "baseline" }}>Mapa dos buracos</Text>
       </View>

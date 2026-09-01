@@ -1,13 +1,19 @@
+import { useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Text, View } from "react-native";
 import BarraNavegacao from "../components/barra_navegacao";
+import StatusLogin from "../components/status_login";
 
-export default function criar_reporte() {
+export default function CriarReporte() {
+  const { logado } = useLocalSearchParams<{ logado?: string }>();
+  const estaLogado = logado === "true";
+
   return (
     <View style={{ flex: 1 }}>
       <BarraNavegacao />
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center" }}>
-        <Text style={{ fontSize: 20, fontWeight: "bold" }}>Criar Reporte</Text>
+        <StatusLogin estaLogado={estaLogado} />
+        <Text style={{ fontSize: 20, fontWeight: "bold" }}>Criar reporte</Text>
       </View>
     </View>
   );

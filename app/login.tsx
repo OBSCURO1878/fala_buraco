@@ -1,9 +1,13 @@
-import { router } from "expo-router";
+import { router, useLocalSearchParams } from "expo-router";
 import React from "react";
 import { Text, TouchableOpacity, View } from "react-native";
 import BarraNavegacao from "../components/barra_navegacao";
+import StatusLogin from "../components/status_login";
 
 export default function Login() {
+  const { logado } = useLocalSearchParams<{ logado?: string }>();
+  const estaLogado = logado === "true";
+
   const confirmarLogin = () => {
     router.replace({
       pathname: "/mapa",
@@ -15,6 +19,7 @@ export default function Login() {
     <View style={{ flex: 1 }}>
       <BarraNavegacao />
       <View style={{ flex: 1, justifyContent: "center", alignItems: "center", gap: 20 }}>
+        <StatusLogin estaLogado={estaLogado} />
         <Text style={{ fontSize: 20, fontWeight: "bold" }}>Faça login com Google</Text>
         <TouchableOpacity
           onPress={confirmarLogin}
